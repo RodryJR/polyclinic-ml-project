@@ -7,3 +7,6 @@
 - Dario Rodriguez Llosa C412
 - José Miguel Zayas Pérez C412
 - Alejandro Ramírez Trueba C411
+
+# Informe 
+Puede ir verificando los avances del informe [aquí](https://www.overleaf.com/read/rhtcbkxrmrwr#06e35c).
