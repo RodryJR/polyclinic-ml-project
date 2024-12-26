@@ -56,6 +56,25 @@ A pesar de que **Prophet** nos ofrece una solución sencilla y práctica en este
 ### Código de Prophet: https://github.com/facebook/prophet 
 ### Para instalar en python: *pip install prophet*
 
+# Tabla Paper
+
+---
+
+| Campo                      | Detalle |
+| -------------------------- | ------- |
+| **Título del Paper**       | Assessment of Time-Series Machine Learning Methods for Forecasting Hospital Discharge Volume       |
+| **Autores**                | Thomas H. McCoy Jr, MD; Amelia M. Pellegrini, BA; Roy H. Perlis, MD, MSc       |
+| **Año de Publicación**     | 2018      |
+| **Objetivo del Estudio**   | Evaluar el desempeño de un método de aprendizaje automático en series temporales para predecir volúmenes de altas hospitalarias en comparación con métodos más simples.       |
+| **Métodos Empleados**      | Modelos de predicción basados en Prophet, autoregresión (SARIMA) y métodos simples de extrapolación de valores previos (última semana, último año).       |
+| **Resultados Principales** | Prophet tuvo mejor calibración (R² = 0.843 y 0.726) y menor error absoluto promedio (11.5 y 11.7 altas/día) en comparación con modelos simples.       |
+| **Impacto/Contribución**   | Demuestra la viabilidad de aplicar métodos de aprendizaje automático accesibles para mejorar la planificación hospitalaria y la asignación de recursos.       |
+| **Contexto Geográfico**    | Dos grandes centros médicos académicos de Nueva Inglaterra, Estados Unidos.      |
+| **Limitaciones**           | Variabilidad entre hospitales, grandes errores absolutos en días específicos, falta de integración de factores externos como clima o infecciones estacionales.       |
+| **Palabras Clave**         | Machine learning, hospital discharge, time-series forecasting, Prophet, healthcare resource planning.       |
+
+---
+
 
 
 
