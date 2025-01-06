@@ -29,3 +29,7 @@ Dado que los intervalos no son regulares en el tiempo las relaciones temporales 
 # Conclusiones
 
 Para mayor precisión en la predicción se intentará aumentar el tamaño del dataset y lograr una regularidad en los intervalos de tiempo.
+
+# Recomendaciones futuras
+
+EL trabajo en esta tarea fue básica para la familiarización con el flujo de trabajo y el pipeline de desarrollo. Se deben incorporar otras métricas y además combinar con otros métodos cómo se plantea en algunos papers. 
