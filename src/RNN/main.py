@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 import torch
 import os
@@ -41,7 +42,11 @@ X_test = torch.tensor(X_test, dtype=torch.float32).unsqueeze(-1)
 y_train = torch.tensor(y_train, dtype=torch.float32)
 y_test = torch.tensor(y_test, dtype=torch.float32)
 
+print("Cantidad de datos a entrenar")
+print(X_train.shape)
 
+print("Cantidad de datos a testear")
+print(X_test.shape)
 
 class SimpleRNN(nn.Module):
     def __init__(self, input_size, hidden_size, output_size):
@@ -95,10 +100,22 @@ y_test_inv = scaler.inverse_transform(y_test.numpy().reshape(-1, 1))
 y_pred_inv = scaler.inverse_transform(y_pred.numpy().reshape(-1, 1))
 
 
+# una prediccion random para comparar tambien en la tabla
+randomprediction = []
+
+for i in range(len(y_test_inv)):
+    randomprediction.append(np.random.uniform(0,300))
+
+randomprediction = np.array(randomprediction)
+
+
+
 # Graficar resultados
 plt.figure(figsize=(10, 6))
+print(y_test_inv)
 plt.plot(y_test_inv, label="Real", marker='o')
 plt.plot(y_pred_inv, label="Predicción", marker='x')
+plt.plot(randomprediction, label="Random", marker='x')
 plt.legend()
 plt.title("Predicción vs Real")
 plt.show()
@@ -115,3 +132,8 @@ with torch.no_grad():
 # Desnormalizar el valor predicho
 next_value_inv = scaler.inverse_transform([[next_value]])
 print("Predicción para el siguiente día:", next_value_inv[0][0])
+
+# error cuadratico medio
+
+mse = mean_squared_error(y_test_inv, y_pred_inv)
+print("Error cuadrático medio:", mse)
