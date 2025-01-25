@@ -5,6 +5,6 @@
 
 python utils/rename_xls.py
 python utils/create_csv.py
-python utils/split_data.py
+python -m utils.split_and_augment_data
 
 echo "Scripts executed successfully."

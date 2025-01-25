@@ -1,5 +1,6 @@
-import pandas as pd
 import os
+import pandas as pd
+from src.Data_Augmentation.random_forest import random_forest_augmentation
 
 total_incomes_file = os.path.join(os.getcwd(), 'data/Anexos_7/total_incomes.csv')
 total_discharges_file = os.path.join(os.getcwd(), 'data/Anexos_7/total_discharges.csv')
@@ -23,8 +24,12 @@ def process_csv(file_path, training_folder, test_folder):
 
     # Save the training and test data 
     base_name = os.path.basename(file_path).replace('.csv', '')
-    training_data.to_csv(os.path.join(training_folder, f'{base_name}_training_data.csv'), index=False)
-    test_data.to_csv(os.path.join(test_folder, f'{base_name}_test_data.csv'), index=False)
+    training_csv = os.path.join(training_folder, f'{base_name}_training_data.csv')
+    test_path = os.path.join(test_folder, f'{base_name}_test_data.csv')
+    training_data.to_csv(training_csv,index=False)
+    test_data.to_csv(test_path, index=False)
+    random_forest_augmentation(training_csv, os.path.join(training_folder,f'{base_name}_augmented_training_data.csv' ))
+
 
 # Process each CSV file
 process_csv(total_incomes_file, training_folder, test_folder)
