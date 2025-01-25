@@ -32,4 +32,39 @@ Para mayor precisión en la predicción se intentará aumentar el tamaño del da
 
 # Recomendaciones futuras
 
-EL trabajo en esta tarea fue básica para la familiarización con el flujo de trabajo y el pipeline de desarrollo. Se deben incorporar otras métricas y además combinar con otros métodos cómo se plantea en algunos papers. 
+EL trabajo en esta tarea fue básica para la familiarización con el flujo de trabajo y el pipeline de desarrollo. Se deben incorporar otras métricas y además combinar con otros métodos cómo se plantea en algunos papers.
+
+---
+
+# Nueva ejecución con datos ampliados
+
+![alt text](image-3.png)
+
+Como se observa en la imagen, los resultados mejoraron SIGNIFICATIVAMENTE, las métricas obtenidas fueron:
+
+- Error cuadrático medio: 214.1036
+- RMSE: 14.632279
+- R2 Score: 0.9390216343195826
+
+Verificamos si está ocurriendo overfitting viendo el comportamiento de las diferentes métricas y aplicando K-Fold Cross Validation.
+
+## K-Fold Cross Validation
+
+Fold 1/5
+Fold 1: RMSE=19.5407, R2=0.8623
+Fold 2/5
+Fold 2: RMSE=23.9539, R2=0.8360
+Fold 3/5
+Fold 3: RMSE=37.7033, R2=0.6905
+Fold 4/5
+Fold 4: RMSE=21.7118, R2=0.8510
+Fold 5/5
+Fold 5: RMSE=32.2624, R2=0.6255
+
+Resultados de Validación Cruzada:
+RMSE Promedio: 27.0344
+R2 Promedio: 0.7731
+
+## Conclusión
+
+El modelo no parece estar sobreajustado pues las métricas obtenidas en la validación cruzada son similares a las obtenidas anteriormente. Parece indicar que el modelo "aprendió" bien las relaciones temporales en los datos.
