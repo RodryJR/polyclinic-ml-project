@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import MinMaxScaler
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, root_mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 import torch
 import os
@@ -35,7 +35,7 @@ timesteps = 7  # Tamaño de las secuencias, cuántos días hacia atrás se usar�
 
 X, y = create_sequences(df['Pinar del Rio'].values, timesteps)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.1, random_state=42)
 
 X_train = torch.tensor(X_train, dtype=torch.float32).unsqueeze(-1)  
 X_test = torch.tensor(X_test, dtype=torch.float32).unsqueeze(-1)
@@ -115,7 +115,7 @@ plt.figure(figsize=(10, 6))
 print(y_test_inv)
 plt.plot(y_test_inv, label="Real", marker='o')
 plt.plot(y_pred_inv, label="Predicción", marker='x')
-plt.plot(randomprediction, label="Random", marker='x')
+# plt.plot(randomprediction, label="Random", marker='x')
 plt.legend()
 plt.title("Predicción vs Real")
 plt.show()
@@ -137,3 +137,11 @@ print("Predicción para el siguiente día:", next_value_inv[0][0])
 
 mse = mean_squared_error(y_test_inv, y_pred_inv)
 print("Error cuadrático medio:", mse)
+
+rmse = root_mean_squared_error(y_test_inv, y_pred_inv)
+print("RMSE:", rmse)
+
+
+r2 = r2_score(y_test_inv, y_pred_inv)
+
+print("R2 Score:", r2)
