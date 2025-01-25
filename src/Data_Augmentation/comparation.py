@@ -85,4 +85,5 @@ plt.show()
 
 
 # export the results
+# Todo: do all this for the report
 data_full.to_csv(output_path, index=False)
