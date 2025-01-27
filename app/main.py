@@ -58,10 +58,17 @@ def main():
             st.dataframe(filtered_data)
 
     if section == "Predicciones":
-        st.header("Resultados de AutoML")
-        st.header("Resultados de RNN")
-        st.header("Resultados de ARIMA")
-        st.header("Resultados de XGBoost")
+        results = st.selectbox("Selecciona el tipo de visualización", 
+                                      options=["Resultados de RNN", "Resultados de AutoML",
+                                               "Resultados de ARIMA", "Resultados de XGBoost"])
+        if results == "Resultados de RNN":
+            st.header("Resultados de RNN")
+        if results == "Resultados de AutoML":
+            st.header("Resultados de AutoML")
+        if results == "Resultados de ARIMA":
+            st.header("Resultados de ARIMA")
+        if results == "Resultados de XGBoost":
+            st.header("Resultados de XGBoost")
 
 if __name__ == '__main__':
     main()
