@@ -1,10 +1,11 @@
 import pandas as pd
 import os
 
-folder_path = os.path.join(os.path.dirname(__file__), '../data/Anexos_7')
-output_file_incomes = os.path.join(folder_path, 'total_incomes.csv')
-output_file_discharges = os.path.join(folder_path, 'total_discharges.csv')
-output_file_hospitalized = os.path.join(folder_path, 'total_hospitalized.csv')
+folder_path = os.path.join(os.path.dirname(__file__), '../data/Anexos_7/xlss')
+output_path = os.path.join(os.path.dirname(__file__), '../data/Anexos_7')
+output_file_incomes = os.path.join(output_path, 'total_incomes.csv')
+output_file_discharges = os.path.join(output_path, 'total_discharges.csv')
+output_file_hospitalized = os.path.join(output_path, 'total_hospitalized.csv')
 
 total_incomes = []
 total_discharges = []
