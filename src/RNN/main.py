@@ -47,7 +47,7 @@ def create_sequences(data, timesteps):
     return np.array(X), np.array(y)
     
   
-def RNN(df, timesteps, target_column, test_size=0.1, random_state=42, rnn_input_size=1, rnn_hidden_size=16, rnn_output_size=1, epochs=200):
+def RNN(df, timesteps, target_column, test_size=0.3, random_state=42, rnn_input_size=1, rnn_hidden_size=16, rnn_output_size=1, epochs=200):
     """ 
     Args:
         - df: DataFrame con los datos
@@ -99,6 +99,9 @@ def RNN(df, timesteps, target_column, test_size=0.1, random_state=42, rnn_input_
         if (epoch + 1) % 20 == 0:
             LOG.info(f"Época {epoch + 1}/{epochs}, Pérdida: {loss.item():.4f}")
             
+
+    torch.save(model.state_dict(), './data/results/model_weights.pth')
+    
     model.eval()
     
     with torch.no_grad():
@@ -132,7 +135,7 @@ def metrics(y_test_inv, y_pred_inv):
 
 
 def main():
-    path = os.path.abspath(os.path.join(os.path.dirname(__file__),"training_data.csv"))
+    path = os.path.abspath(os.path.join(os.path.dirname(__file__),"../../data/Anexos_7/full/total_incomes_augmented_full_data.csv"))
     df = pd.read_csv(path)
 
     df['Date'] = pd.to_datetime(df['Date'])
