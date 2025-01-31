@@ -9,8 +9,8 @@ folder_path = os.path.join(os.path.dirname(__file__), '../data')
 
 os.chdir(folder_path)
 
-anexo_7_folder = os.path.join(folder_path, 'Anexos_7')
-anexo_9_folder = os.path.join(folder_path, 'Anexos_9')
+anexo_7_folder = os.path.join(folder_path, 'Anexos_7/xlss')
+anexo_9_folder = os.path.join(folder_path, 'Anexos_9/xlss')
 
 os.makedirs(anexo_7_folder, exist_ok=True)
 os.makedirs(anexo_9_folder, exist_ok=True)

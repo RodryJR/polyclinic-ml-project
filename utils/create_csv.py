@@ -1,13 +1,25 @@
 import pandas as pd
 import os
 
-folder_path = os.path.join(os.path.dirname(__file__), '../data/Anexos_7')
-output_file = os.path.join(folder_path, 'results.csv')
+folder_path = os.path.join(os.path.dirname(__file__), '../data/Anexos_7/xlss')
+output_path = os.path.join(os.path.dirname(__file__), '../data/Anexos_7')
+output_file_incomes = os.path.join(output_path, 'total_incomes.csv')
+output_file_discharges = os.path.join(output_path, 'total_discharges.csv')
+output_file_hospitalized = os.path.join(output_path, 'total_hospitalized.csv')
 
-results = []
+total_incomes = []
+total_discharges = []
+total_hospitalized = []
+
 
 files = [f for f in os.listdir(folder_path) if f.endswith('.xls') or f.endswith('.xlsx')]
 files.sort()
+
+data_types = [
+    ('incomes', 17, total_incomes),
+    ('discharges', 22, total_discharges),
+    ('hospitalized', 23, total_hospitalized)
+]
 
 for filename in files:
     date = '_'.join(filename.split('_')[:3])
@@ -15,23 +27,32 @@ for filename in files:
     file_path = os.path.join(folder_path, filename)
     xls = pd.ExcelFile(file_path)
 
-    desired_sheet = 'Atención Primaria'
+    desired_sheets = ['Atención Primaria'] 
 
-    if desired_sheet in xls.sheet_names:
-        df = pd.read_excel(xls, sheet_name=desired_sheet)
+    for desired_sheet in desired_sheets:
+        if desired_sheet in xls.sheet_names:
+            df = pd.read_excel(xls, sheet_name=desired_sheet)
+            if desired_sheet == 'Atención Primaria':
+                
+                provinces = df.iloc[8:24, 0].reset_index(drop=True)
 
-            #todo: automate date selection a column selection
-        # change the second number to select the column
-        provinces = df.iloc[8:24, 0].reset_index(drop=True)
-        incomes = df.iloc[8:24, 17].reset_index(drop=True)
+                for data_type, col_index, result_list in data_types:
+                    values = df.iloc[8:24, col_index].reset_index(drop=True)
 
-        income_dict = {'Date': date}
-        for province, income in zip(provinces, incomes):
-            income_dict[province] = income
+                    data_dict = {'Date': date}
+                    for province, value in zip(provinces, values):
+                        data_dict[province] = value
+                    
+                    result_list.append(data_dict)
 
-        results.append(income_dict)
 
-results_df = pd.DataFrame(results)
-results_df.to_csv(output_file, index=False)
+total_incomes_df = pd.DataFrame(total_incomes)
+total_incomes_df.to_csv(output_file_incomes, index=False)
 
-print(f'CSV file created: {output_file}')
+total_discharges_df = pd.DataFrame(total_discharges)
+total_discharges_df.to_csv(output_file_discharges, index=False)
+
+total_hospitalized_df = pd.DataFrame(total_hospitalized)
+total_hospitalized_df.to_csv(output_file_hospitalized, index=False)
+
+print(f'CSV files created:\n- {output_file_incomes}\n- {output_file_discharges}\n- {output_file_hospitalized}')
