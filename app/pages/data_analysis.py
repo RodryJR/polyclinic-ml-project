@@ -46,13 +46,6 @@ def main():
                          title="Total de casos por provincia")
             st.plotly_chart(fig)
 
-        # elif visualization == "Estadísticas":
-        #     # mostrar cada mes del año y la cantidad de datos faltantes en una tabla por mes
-        #     # mostrar por año ordenado por los meses con menores datos
-        #     st.write("Estadísticas descriptivas:")
-        #     st.dataframe(data.describe())
-
-
         if visualization == "Estadísticas":
             if 'Date' in data.columns:
                 data['Date'] = pd.to_datetime(data['Date'])
