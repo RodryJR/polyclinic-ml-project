@@ -12,7 +12,6 @@ data = pd.read_csv(data_path)
 data['Date'] = pd.to_datetime(data['Date'], format='%Y_%m_%d')
 
 def Inicio():
-    # client.showSidebarNavigation = false
     Navbar()
     st.title("Pronóstico de Casos de Enfermedades Respiratorias Agudas")
     st.header("Objetivo del proyecto")
