@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 from xgboost import XGBRegressor
-from sklearn.metrics import mean_squared_error,mean_absolute_error
+from sklearn.metrics import mean_squared_error,mean_absolute_error,root_mean_squared_error, r2_score
 import matplotlib.pyplot as plt
 import seaborn as sns
 color_pal = sns.color_palette()  
@@ -100,11 +100,12 @@ def train_and_evaluate(train_data, test_data, target_col, features):
     y_pred = model.predict(X_test)
     y_pred = np.round(y_pred)
 
-    rmse = np.sqrt(mean_squared_error(y_test, y_pred))
+    rmse = root_mean_squared_error(y_test, y_pred)
     mse = mean_squared_error(y_test, y_pred)
     mae = mean_absolute_error(y_test, y_pred)
+    r2 = r2_score(y_test,y_pred)
 
-    return model, y_pred, rmse, mse, mae
+    return model, y_pred, rmse, mse, mae, r2
 
 
 def train_and_evaluate_multiple_targets(train_data, test_data, target_cols, date_col='Date'):
@@ -138,12 +139,12 @@ def train_and_evaluate_multiple_targets(train_data, test_data, target_cols, date
     # Train and evaluate a model for each target column
     for target_col in target_cols:
         print(f'Entrenando modelo para: {target_col}')
-        model, y_pred, rmse, mse, mae = train_and_evaluate(train_data, test_data, target_col, features)
+        model, y_pred, rmse, mse, mae, r2 = train_and_evaluate(train_data, test_data, target_col, features)
         print(f'{target_col} - RMSE: {rmse}, MSE: {mse}, MAE: {mae}')
         models[target_col] = model
         predictions[target_col] = y_pred
 
-    return models, predictions
+    return models, predictions, rmse, mse, mae, r2
 
 
 def plot_model_performance(test_data, target_cols, predictions, date_col='Date', linestyle_test='-',linestyle_predictions='--'):
