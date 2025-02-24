@@ -90,9 +90,9 @@ def train_and_evaluate(train_data, test_data, target_col, features):
     model = XGBRegressor(
         objective='reg:squarederror', 
         n_estimators=1000,
-        learning_rate=0.05,
-        max_depth=7,
-        min_child_weight=3,
+        learning_rate=0.01,
+        max_depth=3,
+        min_child_weight=15,
         gamma=0.1, 
         random_state=42)
     model.fit(X_train, y_train, eval_set=[(X_test, y_test)], verbose=False)
